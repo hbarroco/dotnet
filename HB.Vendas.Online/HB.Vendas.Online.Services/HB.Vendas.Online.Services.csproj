@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HB.Vendas.Online.Data\HB.Vendas.Online.Data.csproj" />
+    <ProjectReference Include="..\HB.Vendas.Online.Domain\HB.Vendas.Online.Domain.csproj" />
+    <ProjectReference Include="..\HB.Vendas.Online.Logging\HB.Vendas.Online.Logging.csproj" />
+  </ItemGroup>
+
+</Project>
