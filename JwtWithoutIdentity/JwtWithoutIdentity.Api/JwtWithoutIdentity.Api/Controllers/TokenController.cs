@@ -40,9 +40,9 @@ namespace JwtWithoutIdentity.Api.Controllers
         {
             if (!ModelState.IsValid) return BadRequest("Token failed to generate");
 
-            var user = (model.Password == "password" && model.UserName == "username");
-
-            if (!user) return Unauthorized();
+            //Do the Login in DataBase
+            //var user = (model.Password == "password" && model.UserName == "username");
+            //if (!user) return Unauthorized();
 
             return Ok(await GerarJwt());
         }
@@ -59,8 +59,8 @@ namespace JwtWithoutIdentity.Api.Controllers
             var claims = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, "Helio"),
-                new Claim(ClaimTypes.Role, "Analista"),
-                new Claim(ClaimTypes.Sid, "11111"),
+                new Claim(ClaimTypes.Role, "Administrator"),
+                new Claim("IdUsuario", "11111"),
             });
 
             // authentication successful so generate jwt token

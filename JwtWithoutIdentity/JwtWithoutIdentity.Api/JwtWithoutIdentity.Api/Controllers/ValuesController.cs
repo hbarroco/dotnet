@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +10,7 @@ namespace JwtWithoutIdentity.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ValuesController : ControllerBase
     {
         private readonly AppSettings _appSettings;
@@ -20,6 +22,7 @@ namespace JwtWithoutIdentity.Api.Controllers
 
         // GET api/values
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<IEnumerable<string>> Get()
         {
             var name = User.Identity.Name;
@@ -29,6 +32,7 @@ namespace JwtWithoutIdentity.Api.Controllers
         }
 
         // GET api/values/5
+        [Authorize(Roles = "User")]
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
