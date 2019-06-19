@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiWithSwagger.Api</name>
+    </assembly>
+    <members>
+        <member name="M:ApiWithSwagger.Api.Controllers.ClientController.Get">
+            <summary>
+            Consulta todos os Clientes.
+            </summary>        
+            <returns>Retorna uma lista do Objeto Cliente</returns>
+        </member>
+        <member name="M:ApiWithSwagger.Api.Controllers.ClientController.Get(System.Int32)">
+            <summary>
+            Consulta clientes pelo seu Id
+            </summary>
+            <param name="id">Id do cliente</param>
+            <returns>Retorna o Objeto CLiente</returns>
+        </member>
+        <member name="M:ApiWithSwagger.Api.Controllers.ClientController.Post(ApiWithSwagger.Api.Model.ClientDto)">
+            <summary>
+            Realiza o insert de um novo cliente
+            </summary>
+            <param name="dto">objeto cliente</param>
+            <returns>Retorna o Objeto Cliente que foi criado</returns>
+        </member>
+        <member name="M:ApiWithSwagger.Api.Controllers.ClientController.Put(System.Int32,ApiWithSwagger.Api.Model.ClientDto)">
+            <summary>
+            Realiza o update de um cliente
+            </summary>
+            <param name="id">Id do cliente a ser alterado</param>
+            <param name="value">objeto cliente a ser alterado</param>
+            <returns>Retorna o Objeto Cliente que foi Alterado</returns>
+        </member>
+        <member name="M:ApiWithSwagger.Api.Controllers.ClientController.Delete(System.Int32)">
+            <summary>
+            Realiza o delete de um cliente
+            </summary>
+            <param name="id">Id do cliente a ser deletado</param>        
+            <returns>Retorna o código 200</returns>
+        </member>
+    </members>
+</doc>
