@@ -39,6 +39,34 @@ namespace HB.Vendas.Online.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ///////////////////////////////////////////////////////////////
+            /// Cookie configurations
+            //////////////////////////////////////////////////////////////
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+       .AddCookie(options =>
+       {
+           options.AccessDeniedPath = "/AuthWithCookie/Login";
+           options.LoginPath = "/AuthWithCookie/Login";
+       });
+
+
+            //////////////////////////////////////////////////////////////
+
+
+
             services.AddMvc(options =>
                     options.Filters.Add(typeof(CustomExceptionFilter)))
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -57,6 +85,8 @@ namespace HB.Vendas.Online.Presentation
             Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
             services.AddAutoMapper();
             // End Registering and Initializing AutoMapper
+
+            services.AddSingleton<AuthenticationHandler2>();
 
             StartContainer.Start(services);
         }
@@ -81,6 +111,10 @@ namespace HB.Vendas.Online.Presentation
 
             Utilities.Helpers.AppContext.Configure(app.ApplicationServices
                      .GetRequiredService<IHttpContextAccessor>());
+
+
+            app.UseAuthentication();
+
 
             app.UseMvc(routes =>
             {
