@@ -6,8 +6,8 @@ namespace HB.Sorte.Online.ConsoleTest.Entities
 {
     public class RankingLotoFacil
     {
-        public int Dezena { get; set; }
+        public int Dozen { get; set; }
 
-        public int Quantidade { get; set; }
+        public int Quantity { get; set; }
     }
 }
