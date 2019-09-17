@@ -38,7 +38,7 @@ namespace ApiWithSwagger.Api
                 {
                     Version = "v1",
                     Title = "Api de exemplo do Swagger",
-                    Description = "Um exemplo simple de ASP.NET Core Web API com Swagger",
+                    Description = "Um exemplo simples de ASP.NET Core API com Swagger",
                     TermsOfService = "None",
                     Contact = new Contact
                     {
