@@ -21,6 +21,11 @@ namespace HB.Sorte.Online.Services.Implementations
             this._repository.Add(entity);
         }
 
+        public void Add(List<HistoryLotoFacil> entity)
+        {
+            this._repository.Add(entity);
+        }
+
         public List<HistoryLotoFacil> GetAll()
         {
             return this._repository.GetAll();
@@ -39,6 +44,13 @@ namespace HB.Sorte.Online.Services.Implementations
         public void Update(HistoryLotoFacil entity)
         {
             this._repository.Update(entity);
+        }
+
+        public void LoadHistory(List<HistoryLotoFacil> entity)
+        {
+            this._repository.Remove(string.Empty);
+
+            this._repository.Add(entity);
         }
     }
 }

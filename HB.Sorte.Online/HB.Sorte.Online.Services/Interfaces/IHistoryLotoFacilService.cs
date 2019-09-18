@@ -7,5 +7,8 @@ namespace HB.Sorte.Online.Services.Interfaces
 {
     public interface IHistoryLotoFacilService : IServiceBase<HistoryLotoFacil>
     {
+        void Add(List<HistoryLotoFacil> entity);
+
+        void LoadHistory(List<HistoryLotoFacil> entity);
     }
 }

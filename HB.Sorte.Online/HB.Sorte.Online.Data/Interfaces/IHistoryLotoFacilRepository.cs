@@ -7,5 +7,6 @@ namespace HB.Sorte.Online.Data.Interfaces
 {
     public interface IHistoryLotoFacilRepository : IRepositoryBase<HistoryLotoFacil>
     {
+        void Add(List<HistoryLotoFacil> entity);
     }
 }
