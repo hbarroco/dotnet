@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HB.Sorte.Online.ConsoleTest.Entities
+namespace HB.Sorte.Online.Domain.Entities
 {
     public class Bets
     {        

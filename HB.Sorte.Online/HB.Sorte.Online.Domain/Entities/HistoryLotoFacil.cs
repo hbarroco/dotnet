@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HB.Sorte.Online.ConsoleTest.Entities
+namespace HB.Sorte.Online.Domain.Entities
 {
-    public class GameLotoFacil : Bets
+    public class HistoryLotoFacil : Bets
     {
         public string Concourse { get; set; }
         public DateTime DateAward { get; set; }

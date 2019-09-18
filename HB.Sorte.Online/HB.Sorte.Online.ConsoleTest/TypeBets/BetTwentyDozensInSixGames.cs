@@ -1,5 +1,5 @@
-﻿using HB.Sorte.Online.ConsoleTest.Entities;
-using HB.Sorte.Online.ConsoleTest.Utilities;
+﻿using HB.Sorte.Online.ConsoleTest.Utilities;
+using HB.Sorte.Online.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

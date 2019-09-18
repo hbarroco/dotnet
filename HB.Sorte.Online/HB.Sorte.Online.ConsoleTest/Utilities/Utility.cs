@@ -1,4 +1,4 @@
-﻿using HB.Sorte.Online.ConsoleTest.Entities;
+﻿using HB.Sorte.Online.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -13,15 +13,15 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
     {
         public static string CURRENT_CULTURE = "pt-BR";
 
-        public static List<GameLotoFacil> GetLastBets() {
+        public static List<HistoryLotoFacil> GetLastBets() {
 
             var stream = new StreamReader(@"C:\LotoFacil\CurrentLotoFacil.csv");
 
             string linha = null;
             string currentConcurso = string.Empty;
             string newConcurso = string.Empty;
-            var lotoFacil = new GameLotoFacil();
-            var betsLotoFacil = new List<GameLotoFacil>();
+            var lotoFacil = new HistoryLotoFacil();
+            var betsLotoFacil = new List<HistoryLotoFacil>();
             int indiceConcurso = 0;
             string header = "Conc.";
 
@@ -38,7 +38,7 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
                     {
                         indiceConcurso = 0;
                         currentConcurso = currentColunas[0];
-                        lotoFacil = new GameLotoFacil();
+                        lotoFacil = new HistoryLotoFacil();
                         lotoFacil.Concourse = currentConcurso;
                         lotoFacil.DateAward = Convert.ToDateTime(currentColunas[1], new CultureInfo("pt-BR"));
                     }
@@ -84,7 +84,7 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
             return betsLotoFacil;
         }
 
-        public static List<RankingLotoFacil> RankingMoreBets(List<GameLotoFacil> bets)
+        public static List<RankingLotoFacil> RankingMoreBets(List<HistoryLotoFacil> bets)
         {
             var rankingBets = new List<RankingLotoFacil>();
 

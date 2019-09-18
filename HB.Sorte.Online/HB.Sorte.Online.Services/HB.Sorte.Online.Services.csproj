@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HB.Sorte.Online.Data\HB.Sorte.Online.Data.csproj" />
+    <ProjectReference Include="..\HB.Sorte.Online.Domain\HB.Sorte.Online.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
