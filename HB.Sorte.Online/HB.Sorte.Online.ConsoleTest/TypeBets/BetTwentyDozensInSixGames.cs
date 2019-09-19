@@ -1,15 +1,30 @@
 ﻿using HB.Sorte.Online.ConsoleTest.Utilities;
 using HB.Sorte.Online.Domain.Entities;
+using HB.Sorte.Online.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HB.Sorte.Online.ConsoleTest.TypeBets
 {
-    public static class BetTwentyDozensInSixGames
-    {
-        public static void PrintBetTwentyDozensInSixGames(List<int> lastBets)
+    public class BetTwentyDozensInSixGames
+    {   
+        private List<int> _lastBets;
+        private readonly IHistoryLotoFacilService _historyLotoFacilService;
+        private readonly IRankingLotoFacilService _rankingLotoFacilService;
+
+        public BetTwentyDozensInSixGames(ServiceProvider serviceProvider, List<int> lastBets)
+        {   
+            this._lastBets = lastBets;
+            this._historyLotoFacilService = serviceProvider.GetService<IHistoryLotoFacilService>();
+            this._rankingLotoFacilService = serviceProvider.GetService<IRankingLotoFacilService>();
+        }
+
+        public void Run()
         {
+            Console.WriteLine(" ###### START - Apostas Online - BetTwentyDozensInSixGames ###### \n ");
+
             var listBets = BetTwentyDozensInSixGamesCore(6);
 
             //Ordering the bets to return
@@ -37,62 +52,18 @@ namespace HB.Sorte.Online.ConsoleTest.TypeBets
                 itemsSorted.Add(item.Dozen15);
                 itemsSorted.Sort();
 
-                //Counting quantity asserts base last Bets
-                countAssertsLastBets = 0;
-                foreach (var valueSorted in itemsSorted)
-                {
-                    foreach (var lastBet in lastBets)
-                    {
-                        if (lastBet == valueSorted)
-                            countAssertsLastBets += 1;
-                    }
-                }
-
-                betsFormated = new StringBuilder();
-                betsFormated.Append(string.Format(" Aposta {0}: ", countBet.ToString()));
-                betsFormated.Append(itemsSorted[0].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[1].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[2].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[3].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[4].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[5].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[6].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[7].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[8].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[9].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[10].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[11].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[12].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[13].ToString());
-                betsFormated.Append(" - ");
-                betsFormated.Append(itemsSorted[14].ToString());
-
-                betsFormated.Append(string.Format("\n Quantidade acertos com base no ultimo sorteio : {0}", countAssertsLastBets.ToString()));
-
-                Console.WriteLine(betsFormated.ToString());
-                Console.WriteLine("\n");
+                Utility.PrintBets(countBet, itemsSorted, this._lastBets);
             }
+
+            Console.WriteLine(" ###### FINISH - Apostas Online - BetTwentyDozensInSixGames ###### \n ");
         }
 
-        public static List<Bets> BetTwentyDozensInSixGamesCore(int quantityBets)
+        private List<Bets> BetTwentyDozensInSixGamesCore(int quantityBets)
         {
             //Generated Randons and LessScoreds
-            var bets = Utility.GetLastBets();
-            var rankingBets = Utility.RankingMoreBets(bets);
-            var lessFiveDozens = Utility.GetLessScoreDozens(rankingBets, 5);
+            var bets = this._historyLotoFacilService.GetAll();
+            var rankingBets = this._rankingLotoFacilService.RankingMoreBets(bets);
+            var lessFiveDozens = this._rankingLotoFacilService.GetLessScoreDozens(rankingBets, 5);
             var randomOnetoFiften = Utility.GetRandomNumbers(1, 15, 9);
             var randonSixtentoTwentFive = Utility.GetRandomNumbers(16, 25, 6);
 

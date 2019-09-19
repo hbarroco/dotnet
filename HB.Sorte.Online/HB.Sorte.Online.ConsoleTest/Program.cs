@@ -24,13 +24,21 @@ namespace HB.Sorte.Online.ConsoleTest
         {
             var serviceProvider = ExecuteIoCAndConfigs();
 
-            Console.WriteLine("START - Apostas Online - \n ");
+            var lastLotoFacil = new List<int> {1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 16, 20, 21, 23, 25};
 
-            SetupHistoryLotoFacil(serviceProvider);
+            #region Setup Dados LotoFacil
+            //SetupHistoryLotoFacil(serviceProvider);
+            #endregion
 
-            //BetTwentyDozensInSixGames.PrintBetTwentyDozensInSixGames(new List<int> { 2, 3, 5, 6, 7, 10, 11, 12, 14, 17, 19, 20, 21, 24, 25 });
+            #region Run Bet BetTwentyDozensInSixGames
+            var betTwentyDozensInSixGames = new BetTwentyDozensInSixGames(serviceProvider, lastLotoFacil);
+            betTwentyDozensInSixGames.Run();
+            #endregion
 
-            Console.WriteLine("FINISH - Apostas Online - ");
+            #region Run Bet BetFixedTableNineDozensGames
+            var betFixedTableNineDozensGames = new BetFixedTableNineDozensGames(serviceProvider, lastLotoFacil);
+            betFixedTableNineDozensGames.Run();
+            #endregion
 
             Console.ReadLine();
         }
@@ -38,7 +46,7 @@ namespace HB.Sorte.Online.ConsoleTest
         public static void SetupHistoryLotoFacil(ServiceProvider serviceProvider)
         {
             var historyLotoFacilService = serviceProvider.GetService<IHistoryLotoFacilService>();
-            var listHistoryLotoFacil = Utility.GetLastBets();
+            var listHistoryLotoFacil = Utility.ReadLatestBetsFromFile();
             historyLotoFacilService.LoadHistory(listHistoryLotoFacil);
         }
 
@@ -57,6 +65,9 @@ namespace HB.Sorte.Online.ConsoleTest
                 .AddLogging()
                 .AddSingleton<IHistoryLotoFacilService, HistoryLotoFacilService>()
                 .AddSingleton<IHistoryLotoFacilRepository, HistoryLotoFacilRespository>()
+                .AddSingleton<IFixedTableNineDozensRepository, FixedTableNineDozensRepository>()
+                .AddSingleton<IFixedTableNineDozensService, FixedTableNineDozensService>()
+                .AddSingleton<IRankingLotoFacilService, RankingLotoFacilService>()
                 .AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString))
                 .Configure<HBConfiguration>(x => { x.ConnectionString = dbConnectionString; })
                 .BuildServiceProvider();

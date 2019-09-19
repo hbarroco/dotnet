@@ -7,6 +7,7 @@ using System.Text;
 using Dapper;
 using Microsoft.Extensions.Options;
 using HB.Sorte.Online.Data.Connection;
+using System.Linq;
 
 namespace HB.Sorte.Online.Data.Implementations
 {
@@ -60,7 +61,20 @@ namespace HB.Sorte.Online.Data.Implementations
 
         public List<HistoryLotoFacil> GetAll()
         {
-            throw new NotImplementedException();
+            var query = @"
+                    SELECT Concourse, DateAward, ValueAward, WinnersQuantity 
+                        ,Dozen1, Dozen2, Dozen3, Dozen4, Dozen5, Dozen6, Dozen7, Dozen8 
+                        ,Dozen9, Dozen10, Dozen11, Dozen12, Dozen13, Dozen14, Dozen15 
+                    FROM [dbo].[HistoryLotoFacil] ";
+
+            var historyLotoFacil = new List<HistoryLotoFacil>();
+
+            using (var dbConnection = this._providerConnection.GetHBApostasConnection)
+            {
+                historyLotoFacil = dbConnection.Query<HistoryLotoFacil>(query).ToList();
+            }
+
+            return historyLotoFacil;
         }
 
         public Domain.Entities.HistoryLotoFacil GetById(string entityId)

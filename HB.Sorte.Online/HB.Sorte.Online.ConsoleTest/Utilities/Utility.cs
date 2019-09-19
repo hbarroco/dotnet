@@ -13,7 +13,7 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
     {
         public static string CURRENT_CULTURE = "pt-BR";
 
-        public static List<HistoryLotoFacil> GetLastBets() {
+        public static List<HistoryLotoFacil> ReadLatestBetsFromFile() {
 
             var stream = new StreamReader(@"C:\LotoFacil\CurrentLotoFacil.csv");
 
@@ -72,7 +72,7 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
                         lotoFacil.WinnersQuantity = Convert.ToInt32(currentColunas[7]);
 
                         if (lotoFacil.WinnersQuantity > 0)
-                            lotoFacil.ValueAward = GetValueLineBet(currentColunas[8], currentColunas[9]);
+                            lotoFacil.ValueAward = GetValueLineBetFromFile(currentColunas[8], currentColunas[9]);
 
                         betsLotoFacil.Add(lotoFacil);
                     }
@@ -83,71 +83,7 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
 
             return betsLotoFacil;
         }
-
-        public static List<RankingLotoFacil> RankingMoreBets(List<HistoryLotoFacil> bets)
-        {
-            var rankingBets = new List<RankingLotoFacil>();
-
-            for (int i = 1; i <= 25; i++)
-            {
-                rankingBets.Add(new RankingLotoFacil { Dozen = i, Quantity = 0 });
-            }
-
-            foreach (var currentBets in bets)
-            {
-                foreach (var currentRankingBets in rankingBets)
-                {
-                    if (currentRankingBets.Dozen == currentBets.Dozen1)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen2)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen3)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen4)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen5)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen6)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen7)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen8)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen9)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen10)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen11)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen12)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen13)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen14)
-                        currentRankingBets.Quantity += 1;
-
-                    if (currentRankingBets.Dozen == currentBets.Dozen15)
-                        currentRankingBets.Quantity += 1;
-
-                }
-            }
-
-            return rankingBets.OrderByDescending(x => x.Quantity).ToList();
-        }
-            
+    
         public static List<int> GetRandomNumbers(int valueMin, int valueMax, int countItems, List<int> excludeNumbers = null)
         {
             var random = new Random();
@@ -173,18 +109,58 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
 
             return randomNumbers.ToList();
         }
-
-        public static List<int> GetLessScoreDozens(List<RankingLotoFacil> rankingBets, int quantity)
-        {
-            return rankingBets.OrderBy(x => x.Quantity).Take(quantity).Select(y => y.Dozen).ToList();
-        }
-
-        private static List<int> GetMoreScoreDozens(List<RankingLotoFacil> rankingBets, int quantity)
-        {
-            return rankingBets.OrderByDescending(x => x.Quantity).Take(quantity).Select(y => y.Dozen).ToList();
-        }
         
-        private static decimal GetValueLineBet(string value1, string value2)
+        public static void PrintBets(int countBet, List<int> itemsSorted, List<int> lastBets)
+        {
+            var countAssertsLastBets = 0;
+            foreach (var valueSorted in itemsSorted)
+            {
+                foreach (var lastBet in lastBets)
+                {
+                    if (lastBet == valueSorted)
+                        countAssertsLastBets += 1;
+                }
+            }
+
+            var betsFormated = new StringBuilder();
+            betsFormated.Append(string.Format(" Aposta {0}: ", countBet.ToString()));
+            betsFormated.Append(itemsSorted[0].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[1].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[2].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[3].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[4].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[5].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[6].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[7].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[8].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[9].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[10].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[11].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[12].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[13].ToString());
+            betsFormated.Append(" - ");
+            betsFormated.Append(itemsSorted[14].ToString());
+
+            betsFormated.Append(string.Format("\n Quantidade acertos com base no ultimo sorteio : {0}", countAssertsLastBets.ToString()));
+
+            Console.WriteLine(betsFormated.ToString());
+            Console.WriteLine("\n");
+        }
+
+        private static decimal GetValueLineBetFromFile(string value1, string value2)
         {
             var value = string.Concat(value1, ",", value2);
 
@@ -210,6 +186,6 @@ namespace HB.Sorte.Online.ConsoleTest.Utilities
                 }
             }
             return sb.ToString();
-        }
+        }        
     }
 }
