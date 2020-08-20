@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using Radar.Services.Interface;
 using Radar.Services.Implementation;
+using Radar.Data.Interface;
+using Radar.Data.Implementation;
 
 namespace Radar.IoC
 {
@@ -18,7 +20,7 @@ namespace Radar.IoC
             services.AddSingleton<IProdutoService, ProdutoService>();
 
             //Data
-            //services.AddSingleton<ISampleData, SampleData>();
+            services.AddSingleton<IProdutoData, ProdutoData>();
         }
     }
 }

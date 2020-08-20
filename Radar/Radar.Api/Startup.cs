@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Radar.IoC;
 using AutoMapper;
 using Radar.Domain.Entities;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Radar.Api
 {
@@ -29,6 +31,10 @@ namespace Radar.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            string dbConnectionString = this.Configuration.GetConnectionString("dbConnection");
+            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
+
             StartContainer.Start(services);
             AutoMapperConfig(services);
         }

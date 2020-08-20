@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Radar.Services\Radar.Services.csproj" />
     <ProjectReference Include="..\Radar.Domain\Radar.Domain.csproj" />
+    <ProjectReference Include="..\Radar.Data\Radar.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

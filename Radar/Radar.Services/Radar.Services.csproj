@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Radar.Domain\Radar.Domain.csproj" />
+    <ProjectReference Include="..\Radar.Data\Radar.Data.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
