@@ -1,0 +1,2 @@
+2024-03-22 16:08:31.8226 INFO Here is WeatherForecastController -> GetWeatherForecast.
+2024-03-22 16:10:00.4984 INFO Here is AuthController -> Login.
