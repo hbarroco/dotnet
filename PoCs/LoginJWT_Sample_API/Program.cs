@@ -79,6 +79,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseDeveloperExceptionPage();
+
 app.Run();
 
 // app.Run("https://localhost:7157");

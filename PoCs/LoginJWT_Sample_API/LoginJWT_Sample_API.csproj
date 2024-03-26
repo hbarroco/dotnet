@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>LoginLogoutJWT_Sample</RootNamespace>
+	<EnvironmentName>Development</EnvironmentName>
   </PropertyGroup>
 
   <ItemGroup>
