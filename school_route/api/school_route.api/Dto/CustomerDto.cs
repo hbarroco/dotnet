@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace school_route.models
+namespace school_route.api.Dto
 {
-    public class Customer
+    public class CustomerDto
     {
-        public Customer() { }
+        public CustomerDto() { }
 
         public int Id { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public string LastName { get; set; }
 
         public DateTime Dob { get; set; }
 
+        [Required]
         public string Email { get; set; }
     }
 }

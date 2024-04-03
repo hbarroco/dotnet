@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace school_route.services.interfaces
 {
-    public interface ICustomerServices : IGenericServices<Customer>
+    public interface ICustomerServices : IGenericServices<CustomerModel>
     {
     }
 }

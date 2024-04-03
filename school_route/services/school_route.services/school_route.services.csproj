@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\school_route.infrastructure\school_route.infrastructure.csproj" />
     <ProjectReference Include="..\..\models\school_route.models\school_route.models.csproj" />
     <ProjectReference Include="..\..\repository\school_route.repository\school_route.repository.csproj" />
   </ItemGroup>

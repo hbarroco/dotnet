@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\school_route.infrastructure\school_route.infrastructure.csproj" />
     <ProjectReference Include="..\..\models\school_route.models\school_route.models.csproj" />
     <ProjectReference Include="..\..\services\school_route.services\school_route.services.csproj" />
   </ItemGroup>

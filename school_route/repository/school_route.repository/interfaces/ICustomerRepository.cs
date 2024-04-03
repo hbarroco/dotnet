@@ -2,7 +2,7 @@
 
 namespace school_route.repository.interfaces
 {
-    public interface ICustomerRepository : IGenericRepository<Customer>
+    public interface ICustomerRepository : IGenericRepository<CustomerModel>
     {
     }
 }

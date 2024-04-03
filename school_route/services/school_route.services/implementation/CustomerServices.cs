@@ -1,11 +1,6 @@
 ﻿using school_route.models;
 using school_route.repository.interfaces;
 using school_route.services.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace school_route.services.implementation
 {
@@ -18,37 +13,29 @@ namespace school_route.services.implementation
             this._repository = repository;
         }
 
-        public Task<int> AddAsync(Customer entity)
+        public Task<int> AddAsync(CustomerModel entity)
         {
-            throw new NotImplementedException();
+                return this._repository.AddAsync(entity);
         }
 
         public Task<int> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+                return this._repository.DeleteAsync(id);
         }
 
-        public Task<IReadOnlyList<Customer>> GetAllAsync()
+        public Task<IEnumerable<CustomerModel>> GetAllAsync()
         {
-            try
-            {
-                var customers = this._repository.GetAllAsync();
-                return customers;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }           
+            return this._repository.GetAllAsync();
         }
 
-        public Task<Customer?> GetByIdAsync(int id)
+        public Task<CustomerModel?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+                return this._repository.GetByIdAsync(id);
         }
 
-        public Task<int> UpdateAsync(Customer entity)
+        public Task<int> UpdateAsync(CustomerModel entity)
         {
-            throw new NotImplementedException();
+                return this._repository.UpdateAsync(entity);
         }
     }
 }

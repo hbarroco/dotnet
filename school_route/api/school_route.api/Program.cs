@@ -1,6 +1,10 @@
+using NLog;
 using school_route.api.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// NLog Config
+LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Add services to the container.
 
