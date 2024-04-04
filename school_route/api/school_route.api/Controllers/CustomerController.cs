@@ -1,23 +1,23 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using school_route.api.Dto;
 using school_route.infrastructure.Log;
 using school_route.models;
-using school_route.repository.interfaces;
 using school_route.services.interfaces;
 
 namespace school_route.api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CustomerController : Controller
     {
         public readonly ICustomerServices _customerServices;
         private readonly IMapper _mapper;
-        private readonly ILoggerManager _logger;
+        private readonly ILoggerHelper _logger;
 
-        public CustomerController(ICustomerServices customerServices, IMapper mapper, ILoggerManager loggerManager) 
+        public CustomerController(ICustomerServices customerServices, IMapper mapper, ILoggerHelper loggerManager) 
         {
             this._customerServices = customerServices;
             this._mapper = mapper;
@@ -36,9 +36,8 @@ namespace school_route.api.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
-                return StatusCode(500, ex.Message);
+                return Problem(ex.Message);
             }
-
         }
 
         [HttpGet("get/{id}")]
@@ -53,7 +52,7 @@ namespace school_route.api.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
-                return StatusCode(500, ex.Message);
+                return Problem(ex.Message);
             }
         }
 
@@ -70,7 +69,7 @@ namespace school_route.api.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
-                return StatusCode(500, ex.Message);
+                return Problem(ex.Message);
             }
         }
 
@@ -86,7 +85,7 @@ namespace school_route.api.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
-                return StatusCode(500, ex.Message);
+                return Problem(ex.Message);
             }
         }
 
@@ -101,7 +100,7 @@ namespace school_route.api.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError(ex.Message);
-                return StatusCode(500, ex.Message);
+                return Problem(ex.Message);
             }
 
         }

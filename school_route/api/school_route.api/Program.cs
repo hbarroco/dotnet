@@ -11,9 +11,9 @@ LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentD
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrastructure();
+SwaggerGenRegistration.AddInfrastructure(builder);
+IoCRegistration.AddInfrastructure(builder);
 
 var app = builder.Build();
 

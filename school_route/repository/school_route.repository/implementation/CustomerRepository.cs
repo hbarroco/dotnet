@@ -1,6 +1,5 @@
 ﻿
 using Dapper;
-using Microsoft.Extensions.Configuration;
 using school_route.models;
 using school_route.repository.connection;
 using school_route.repository.interfaces;
